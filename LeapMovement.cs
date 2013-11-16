@@ -5,15 +5,9 @@ using Leap;
 
 public class LeapMovement : MonoBehaviour {
 	
-	//Private variables
-	Finger[] pointerFinger = new Finger[2];
-	/*Vector3 beginningLocation = new Vector3();
-	float oldDistance = -1;*/
-	
 	// Use this for initialization
 	void Start () {
-		pointerFinger[0] = null;
-		pointerFinger[1] = null;
+
 	}
 	
 	// Update is called once per frame
