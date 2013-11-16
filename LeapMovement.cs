@@ -21,7 +21,9 @@ public class LeapMovement : MonoBehaviour {
 		int availableHands = 0;
 		foreach (LeapConnect2.HandStruct h in LeapConnect2.hands) { //For each hand...
 			if (h.handUpd != null) { //If it's not null...
-				availableHands++; //Increment available hands value
+				if (h.handUpd.Fingers.Count > 3) { //If there's more than 3 fingers available
+					availableHands++; //Increment available hands value
+				}
 			}
 		}
 		if (availableHands == 1) {
@@ -29,13 +31,13 @@ public class LeapMovement : MonoBehaviour {
 				if (h.handUpd != null) { //If it's not null...
 					if (h.handUpd.Fingers.Count > 3) { //If there's more than three fingers...
 						if (h.handUpd.RotationAxis(LeapConnect2.lastFrame).z >= 0) {
-							gameObject.transform.Rotate(Vector3.forward, h.handUpd.RotationAngle(LeapConnect2.lastFrame) * 50); //Rotate around the forward (z-axis local to main camera) axis by the angle of the hand's rotation (compared to last frame)
+							gameObject.transform.Rotate(Vector3.forward, h.handUpd.RotationAngle(LeapConnect2.lastFrame) * 75); //Rotate around the forward (z-axis local to main camera) axis by the angle of the hand's rotation (compared to last frame)
 						} else {
-							gameObject.transform.Rotate(Vector3.forward * -1, h.handUpd.RotationAngle(LeapConnect2.lastFrame) * 50); //Rotate around the backward (z-axis local to main camera) axis by the angle of the hand's rotation (compared to last frame)
+							gameObject.transform.Rotate(Vector3.forward * -1, h.handUpd.RotationAngle(LeapConnect2.lastFrame) * 75); //Rotate around the backward (z-axis local to main camera) axis by the angle of the hand's rotation (compared to last frame)
 						}
 						if (h.handUpd.TranslationProbability(LeapConnect2.lastFrame) > 0.5) { //If probability of translation is greater than 50%...
-							gameObject.transform.Rotate(Vector3.up, h.handUpd.Translation(LeapConnect2.lastFrame).x / 5); //Horizontal translation equals y-axis rotation
-							gameObject.transform.Rotate(Vector3.left, h.handUpd.Translation(LeapConnect2.lastFrame).y / 5); //Vertical translation equals x-axis rotation
+							gameObject.transform.Rotate(Vector3.up, h.handUpd.Translation(LeapConnect2.lastFrame).x / 2); //Horizontal translation equals y-axis rotation
+							gameObject.transform.Rotate(Vector3.left, h.handUpd.Translation(LeapConnect2.lastFrame).y / 2); //Vertical translation equals x-axis rotation
 						}
 					}
 				}

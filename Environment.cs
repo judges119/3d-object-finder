@@ -6,6 +6,18 @@ public class Environment : MonoBehaviour {
 	//Private variables
 	GameObject[] enviroObjects = new GameObject[50]; //Extra objects in scene
 	GameObject targetObject; //Target object in scene
+	bool finished = false;
+	
+	void OnGUI() {
+		if (finished) {
+			if (GUI.Button(new Rect(Screen.width / 6, Screen.height / 5, Screen.width / 6 * 2, Screen.height / 5 * 2), "Restart")) {
+				Application.LoadLevel(Application.loadedLevel);
+			}
+			if (GUI.Button(new Rect(Screen.width / 6 * 3, Screen.height / 5, Screen.width / 6 * 2, Screen.height / 5 * 2), "Quit")) {
+				Application.Quit();
+			}
+		}
+	}
 	
 	// Use this for initialization
 	void Start () {
@@ -26,6 +38,7 @@ public class Environment : MonoBehaviour {
 			if (f.fingerUpd != null) { //If the finger isn't null
 				if (f.fingerObj.renderer.bounds.Intersects(targetObject.renderer.bounds)) { //If the finger collides with target sphere
 					targetObject.renderer.material.color = new Color(1, 0, 0, 0); //Set the target sphere colour to red
+					finished = true;
 				}
 			}
 		}
