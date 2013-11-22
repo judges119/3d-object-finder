@@ -6,15 +6,16 @@ public class Environment : MonoBehaviour {
 	//Private variables
 	GameObject[] enviroObjects = new GameObject[50]; //Extra objects in scene
 	GameObject targetObject; //Target object in scene
-	bool finished = false;
-	
+	bool finished = false; //Finished game boolean
+
+	//For GUI events
 	void OnGUI() {
-		if (finished) {
-			if (GUI.Button(new Rect(Screen.width / 6, Screen.height / 5, Screen.width / 6 * 2, Screen.height / 5 * 2), "Restart")) {
-				Application.LoadLevel(Application.loadedLevel);
+		if (finished) { //If game is finished
+			if (GUI.Button(new Rect(Screen.width / 6, Screen.height / 5, Screen.width / 6 * 2, Screen.height / 5 * 2), "Restart")) { //Display button to Restart and if pressed...
+				Application.LoadLevel(Application.loadedLevel); //Restart game
 			}
-			if (GUI.Button(new Rect(Screen.width / 6 * 3, Screen.height / 5, Screen.width / 6 * 2, Screen.height / 5 * 2), "Quit")) {
-				Application.Quit();
+			if (GUI.Button(new Rect(Screen.width / 6 * 3, Screen.height / 5, Screen.width / 6 * 2, Screen.height / 5 * 2), "Quit")) { //Display button to Quit and if pressed...
+				Application.Quit(); //Quit
 			}
 		}
 	}
@@ -38,7 +39,7 @@ public class Environment : MonoBehaviour {
 			if (f.fingerUpd != null) { //If the finger isn't null
 				if (f.fingerObj.renderer.bounds.Intersects(targetObject.renderer.bounds)) { //If the finger collides with target sphere
 					targetObject.renderer.material.color = new Color(1, 0, 0, 0); //Set the target sphere colour to red
-					finished = true;
+					finished = true; //Set game to finished
 				}
 			}
 		}
